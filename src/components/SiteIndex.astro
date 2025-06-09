@@ -1,0 +1,14 @@
+---
+import { getCollection } from "astro:content";
+const blogs = await getCollection("blog");
+---
+
+<ul>
+  {
+    blogs.map((post) => (
+      <li>
+        <a href={`/${post.id}`}>{post.data.title || post.id.split('-').map(it => it.charAt(0).toUpperCase() + it.slice(1).replaceAll('-', ' ')).join(' ')}</a>
+      </li>
+    ))
+  }
+</ul>

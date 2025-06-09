@@ -1,0 +1,93 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+:root {
+  --w-typog: 900px;
+}
+
+@layer base {
+  * {
+    @apply border-black/10;
+  }
+  body {
+    @apply text-[1.125rem];
+  }
+  h1:not(.not-prose, .not-prose *) {
+    @apply mt-11 scroll-m-20 text-[2.5rem] font-bold tracking-tight text-primary;
+  }
+  h2:not(.not-prose, .not-prose *) {
+    @apply mt-10 scroll-m-20 pb-2 text-[2.125rem] font-semibold tracking-tight;
+  }
+  h3:not(.not-prose, .not-prose *) {
+    @apply mt-8 scroll-m-20 text-[1.8125rem] font-semibold tracking-tight;
+  }
+  h4:not(.not-prose, .not-prose *) {
+    @apply mt-7 scroll-m-20 text-[1.5625rem] font-semibold tracking-tight;
+  }
+  h5:not(.not-prose, .not-prose *) {
+    @apply mt-7 scroll-m-20 text-[1.3125rem] font-semibold tracking-tight;
+  }
+  h6:not(.not-prose, .not-prose *) {
+    @apply mt-7 scroll-m-20 text-lg font-semibold tracking-tight;
+  }
+  p:not(.not-prose, .not-prose *) {
+    &:empty {
+      @apply hidden;
+    }
+    @apply leading-8 mt-6;
+  }
+  blockquote:not(.not-prose, .not-prose *) {
+    @apply mt-6 border-l-2 pl-6 italic;
+    > p {
+      @apply my-3;
+    }
+  }
+  div:has(> table:only-child):not(.not-prose, .not-prose *) {
+    @apply mt-6 overflow-y-auto;
+    > table {
+      @apply w-[inherit] min-w-[inherit] max-w-[inherit];
+    }
+  }
+  table:not(div > table:only-child):not(.not-prose, .not-prose *) {
+    @apply mt-6;
+  }
+  tr:not(.not-prose *) {
+    @apply m-0 border-t p-0 even:bg-base-200/80;
+  }
+  th:not(.not-prose *) {
+    @apply border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right;
+  }
+  td:not(.not-prose *) {
+    @apply border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right;
+  }
+  ul:not(.not-prose, .not-prose *) {
+    &:not(ul ul):not(ol ul) {
+      @apply mt-6 [&>li]:first:mt-0;
+    }
+    @apply ml-6 list-disc [&>li]:mt-2;
+  }
+  ol:not(.not-prose, .not-prose *) {
+    &:not(ol ol):not(ul ol) {
+      @apply mt-6 [&>li]:first:mt-0;
+    }
+    @apply ml-6 list-decimal [&>li]:mt-2 [&>li]:marker:font-semibold;
+  }
+  code:not(.not-prose, .not-prose *, pre *) {
+    @apply relative rounded bg-base-200/80 px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+  }
+  small:not(.not-prose, .not-prose *) {
+    @apply text-sm font-medium leading-none;
+  }
+  a:not(.not-prose, .not-prose *) {
+    @apply font-medium text-secondary underline underline-offset-4 hover:brightness-80;
+  }
+  strong:not(.not-prose, .not-prose *) {
+    @apply font-semibold;
+  }
+  hr:not(.not-prose, .not-prose *) {
+    @apply mt-6 clear-both;
+  }
+  img {
+    @apply max-w-[330px] max-h-[330px] w-auto h-auto;
+  }
+}

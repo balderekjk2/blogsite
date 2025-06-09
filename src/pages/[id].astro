@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+export async function getStaticPaths() {
+  const blogs = await getCollection("blog");
+  return blogs
+    .filter((post) => post.id !== "home")
+    .map((post) => ({
+      params: { id: post.id },
+      props: { post },
+    }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+let { id } = post;
+let { title, subtitle } = post.data;
+if (!title) {
+  title = id.split('-').map(it => it.charAt(0).toUpperCase() + it.slice(1).replaceAll('-', ' ')).join(' ');
+}
+---
+
+<Layout title={title} subtitle={subtitle}>
+  <Content />
+</Layout>

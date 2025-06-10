@@ -2,9 +2,24 @@
 import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
-let { frontmatter, title, subtitle } = Astro.props;
-if (!title) title = frontmatter?.title;
-if (!subtitle) subtitle = frontmatter?.subtitle;
+const { frontmatter, title, subtitle, lastUpdated } = Astro.props;
+const keys = ['title', 'subtitle', 'lastUpdated'];
+const fm = (key) => Astro.props[key] ?? frontmatter?.[key];
+let vars = { title, subtitle, lastUpdated };
+for (const key of keys) {
+  if (typeof vars[key] === "undefined") {
+    vars[key] = fm(key);
+  }
+}
+try {
+	if (typeof vars['lastUpdated'] === 'string') {
+		vars['lastUpdated'] = new Date(vars['lastUpdated'])
+		vars['lastUpdated'] = vars['lastUpdated'].toLocaleString();
+		if (vars['lastUpdated'].startsWith('Inv')) vars['lastUpdated'] = undefined
+	} else {
+		vars['lastUpdated'] = vars['lastUpdated'].toLocaleString();
+	}
+} catch {/* :D */}
 ---
 
 <!doctype html>
@@ -14,7 +29,7 @@ if (!subtitle) subtitle = frontmatter?.subtitle;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{vars.title}</title>
   </head>
   <body class="flex flex-col w-full min-h-dvh">
     <header>
@@ -24,13 +39,14 @@ if (!subtitle) subtitle = frontmatter?.subtitle;
       class="flex-grow border-x py-3 px-6 my-1 w-7xl max-w-full mx-auto [&>:first-child]:mt-0"
     >
       {
-        title && (
+        vars.title && (
           <hgroup>
-            <h1 class="mt-0">{title}</h1>
-            {subtitle && (
+            <h1 class="mt-0">{vars.title}</h1>
+						{vars.lastUpdated && <p class="mt-1">{vars.lastUpdated}</p>}
+            {vars.subtitle && (
               <blockquote class="border-transparent mt-0 text-primary brightness-120">
                 <p class="mt-1">
-                  <span class="text-2xl">&ldquo;</span> {subtitle} <span class="text-2xl">&rdquo;</span>
+                  <span class="text-2xl">&ldquo;</span> {vars.subtitle} <span class="text-2xl">&rdquo;</span>
                 </p>
               </blockquote>
             )}

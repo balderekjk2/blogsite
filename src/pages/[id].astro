@@ -13,12 +13,12 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 let { id } = post;
-let { title, subtitle } = post.data;
+let { title, subtitle, lastUpdated } = post.data;
 if (!title) {
   title = id.split('-').map(it => it.charAt(0).toUpperCase() + it.slice(1).replaceAll('-', ' ')).join(' ');
 }
 ---
 
-<Layout title={title} subtitle={subtitle}>
+<Layout title={title} subtitle={subtitle} lastUpdated={lastUpdated}>
   <Content />
 </Layout>

@@ -42,14 +42,14 @@ try {
         vars.title && (
           <hgroup>
             <h1 class="mt-0">{vars.title}</h1>
-						{vars.lastUpdated && <p class="mt-1">{vars.lastUpdated}</p>}
             {vars.subtitle && (
               <blockquote class="border-transparent mt-0 text-primary brightness-120">
-                <p class="mt-1">
+                <p class="my-1">
                   <span class="text-2xl">&ldquo;</span> {vars.subtitle} <span class="text-2xl">&rdquo;</span>
                 </p>
               </blockquote>
             )}
+						{vars.lastUpdated && <p class="my-1 ml-9 border-l-2 border-transparent italic">{vars.lastUpdated}</p>}
           </hgroup>
         )
       }

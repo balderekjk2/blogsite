@@ -15,7 +15,10 @@ const { Content } = await render(post);
 let { id } = post;
 let { title, subtitle, lastUpdated } = post.data;
 if (!title) {
-  title = id.split('-').map(it => it.charAt(0).toUpperCase() + it.slice(1).replaceAll('-', ' ')).join(' ');
+  title = id
+    .split("-")
+    .map((it) => it.charAt(0).toUpperCase() + it.slice(1).replaceAll("-", " "))
+    .join(" ");
 }
 ---
 

@@ -1,6 +1,17 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: var(--color-blue-600);
+  --color-primary-content: var(--color-blue-50);
+  --color-secondary: var(--color-orange-600);
+  --color-secondary-content: var(--color-orange-50);
+  --color-accent: var(--color-amber-600);
+  --color-accent-content: var(--color-amber-50);
+}
+
 :root {
   --w-typog: 900px;
 }

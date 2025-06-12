@@ -3,7 +3,7 @@ import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 const { frontmatter, title, subtitle, lastUpdated } = Astro.props;
-const keys = ['title', 'subtitle', 'lastUpdated'];
+const keys = ["title", "subtitle", "lastUpdated"];
 const fm = (key) => Astro.props[key] ?? frontmatter?.[key];
 let vars = { title, subtitle, lastUpdated };
 for (const key of keys) {
@@ -11,15 +11,10 @@ for (const key of keys) {
     vars[key] = fm(key);
   }
 }
-try {
-	if (typeof vars['lastUpdated'] === 'string') {
-		vars['lastUpdated'] = new Date(vars['lastUpdated'])
-		vars['lastUpdated'] = vars['lastUpdated'].toLocaleString();
-		if (vars['lastUpdated'].startsWith('Inv')) vars['lastUpdated'] = undefined
-	} else {
-		vars['lastUpdated'] = vars['lastUpdated'].toLocaleString();
-	}
-} catch {/* :D */}
+if (typeof vars["lastUpdated"] === "string") {
+  vars["lastUpdated"] = new Date(vars["lastUpdated"]);
+  if (vars["lastUpdated"].startsWith("Inv")) vars["lastUpdated"] = new Date();
+}
 ---
 
 <!doctype html>
@@ -45,18 +40,23 @@ try {
             {vars.subtitle && (
               <blockquote class="border-transparent mt-0 text-primary brightness-120">
                 <p class="my-1">
-                  <span class="text-2xl">&ldquo;</span> {vars.subtitle} <span class="text-2xl">&rdquo;</span>
+                  <span class="text-2xl">&ldquo;</span> {vars.subtitle}{" "}
+                  <span class="text-2xl">&rdquo;</span>
                 </p>
               </blockquote>
             )}
-						{vars.lastUpdated && <p class="my-1 ml-9 border-l-2 border-transparent italic">{vars.lastUpdated}</p>}
+            {vars.lastUpdated && (
+              <p class="my-1 ml-9 border-l-2 border-transparent italic">
+                {vars.lastUpdated.toLocaleString()}
+              </p>
+            )}
           </hgroup>
         )
       }
-			<article class="max-w-(--w-typog) mb-6">
-      	<slot />
-			</article>
+      <article class="max-w-(--w-typog) mb-6">
+        <slot />
+      </article>
     </main>
-		<Footer />
+    <Footer />
   </body>
 </html>

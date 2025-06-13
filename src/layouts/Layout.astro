@@ -47,7 +47,7 @@ if (typeof vars["lastUpdated"] === "string") {
             )}
             {vars.lastUpdated && (
               <p class="my-1 ml-9 border-l-2 border-transparent italic">
-                {vars.lastUpdated.toLocaleString()}
+                {vars.lastUpdated.toUTCString()}
               </p>
             )}
           </hgroup>

@@ -26,12 +26,12 @@ if (typeof vars["lastUpdated"] === "string") {
     <meta name="generator" content={Astro.generator} />
     <title>{vars.title}</title>
   </head>
-  <body class="flex flex-col w-full min-h-dvh">
+  <body class="flex flex-col w-full min-h-dvh bg-accent/2">
     <header>
       <Navbar />
     </header>
     <main
-      class="bg-accent/5 flex-grow border-x py-4 px-6 w-7xl max-w-full mx-auto [&>:first-child]:mt-0"
+      class="bg-accent/3 flex-grow border-x py-4 px-6 w-7xl max-w-full mx-auto [&>:first-child]:mt-0"
     >
       {
         vars.title && (
